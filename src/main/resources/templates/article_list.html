@@ -1,0 +1,31 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content">
+    <!--<div>-->
+    <table>
+        <thead>
+        <tr>
+            <th style="width:5%">번호</th>
+            <th style="width:10%">제목</th>
+            <th style="width:10%">글쓴이</th>
+            <th style="width:10%">작성시간</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="article,loop : ${articleList}">
+            <td th:text="${loop.index}+1"></td>
+            <td>
+                <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
+            </td>
+            <td><a th:if="${article.author != null}" th:text="${article.author.username}"></a></td>
+            <td th:text="${#temporals.format(article.localDateTime, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <a th:href="@{/article/create}">질문 등록하기</a>
+</div>
+</html>
